@@ -12,6 +12,12 @@ export default function Home() {
 
   useEffect(() => {
     checkUser()
+    
+    // Clean up URL hash after OAuth
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname)
+    }
+    
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
       if (session?.user) {
