@@ -47,7 +47,11 @@ export default function Home() {
           }
         }
       )
-      .subscribe()
+      .subscribe((status) => {
+        if (status === 'CHANNEL_ERROR') {
+          console.log('Realtime connection error, retrying...')
+        }
+      })
 
     return () => {
       supabase.removeChannel(channel)
