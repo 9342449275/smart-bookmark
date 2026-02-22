@@ -67,7 +67,6 @@ export default function Home() {
     const { data } = await supabase
       .from('bookmarks')
       .select('*')
-      .eq('user_id', user.id)
       .order('created_at', { ascending: false })
     setBookmarks(data || [])
   }
